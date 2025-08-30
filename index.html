@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Engineering the Profession — Mechanical (Quiz)</title>
+<style>
+  :root{
+    --bg:#0b1220;        /* page background */
+    --panel:#0f172a;     /* cards */
+    --ink:#e5e7eb;       /* primary text */
+    --muted:#94a3b8;     /* secondary text */
+    --line:#1f2a44;      /* borders */
+    --accent:#4f46e5;    /* primary accent */
+    --accent-2:#6366f1;  /* hover accent */
+    --ok:#22c55e;--warn:#f59e0b;--danger:#ef4444;
+    --radius:14px; --space:18px; --shadow:0 10px 30px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);
+            font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+  a{color:#a5b4fc;text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:980px;margin:32px auto;padding:0 18px;}
+  header{margin-bottom:16px;text-align:left}
+  .eyebrow{font-size:12px;letter-spacing:.08em;color:var(--muted);
+           text-transform:uppercase;margin:0 0 6px}
+  h1{margin:0 0 6px;font-size:28px;line-height:1.25}
+  h2{margin:0 0 12px;font-size:18px;color:var(--muted);font-weight:600}
+  .meta{display:flex;flex-wrap:wrap;gap:8px 10px;margin:10px 0 0}
+  .chip{border:1px solid var(--line);border-radius:999px;padding:6px 10px;background:rgba(255,255,255,.02);
+        color:#cbd5e1;font-size:13px}
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+        box-shadow:var(--shadow);padding:var(--space);margin:16px 0}
+  .intro p{margin:.5rem 0;color:var(--muted);font-size:15px}
+  .progress{height:8px;border-radius:999px;background:#111936;border:1px solid var(--line);
+            overflow:hidden;margin-top:12px}
+  .bar{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent-2));transition:width .25s ease}
+  .q{padding-top:16px;margin-top:12px;border-top:1px dashed #203154}
+  .q h3{margin:0 0 10px;font-size:16px}
+  .opt{display:flex;flex-direction:column;gap:10px}
+  .opt label{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line);border-radius:12px;
+             padding:12px 14px;background:#0b1429;cursor:pointer;transition:transform .05s ease,border-color .2s ease,box-shadow .2s ease}
+  .opt label:hover{border-color:#30406c;box-shadow:0 4px 18px rgba(2,6,23,.35)}
+  .opt input{appearance:none;width:18px;height:18px;border:2px solid #64748b;border-radius:50%;
+             margin-top:2px;position:relative;top:2px;background:transparent}
+  .opt input:checked{border-color:var(--accent);box-shadow:inset 0 0 0 4px var(--accent)}
+  .controls{display:flex;gap:10px;justify-content:flex-end;margin-top:14px}
+  button{appearance:none;border:0;border-radius:10px;padding:10px 16px;font-weight:600;color:#fff;
+         background:var(--accent);cursor:pointer}
+  button:hover{background:var(--accent-2)}
+  .ghost{background:transparent;color:#e2e8f0;border:1px solid var(--line)}
+  .ghost:hover{background:#111936}
+  .msg{display:none;color:#fecaca;background:#2a0e12;border:1px solid #7f1d1d;border-radius:10px;padding:10px 12px;margin:10px 0}
+  .result{display:none;margin-top:14px}
+  .kpis{display:flex;gap:12px;flex-wrap:wrap}
+  .k{flex:1 1 220px;border:1px dashed var(--line);border-radius:12px;padding:12px 14px;background:#0b1429}
+  .k h4{margin:0 0 4px;color:var(--muted);font-size:13px}
+  .k b{font-size:18px;color:#e2e8f0}
+  footer{color:var(--muted);font-size:12px;margin-top:18px;text-align:center}
+  @media (max-width:640px){
+    h1{font-size:22px}
+    h2{font-size:16px}
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="eyebrow">Engineering, the Profession</div>
+      <h1>Mechanical Engineering — Professional Fit & Awareness Quiz</h1>
+      <h2>Clean, focused questions on tasks, tools, ethics, sustainability, and practice contexts.</h2>
+      <div class="meta">
+        <span class="chip">Instructor: Dr. Hifsa Shahid</span>
+        <span class="chip"><strong>By: Star</strong></span>
+        <span class="chip">Estimated time: ~5–7 minutes</span>
+      </div>
+    </header>
+
+    <section class="panel intro">
+      <p>After focused research, the key themes are distilled here. Select the option that best reflects how you think/work—no trick questions. Your score maps to a simple “fit” readout for ME practice.</p>
+      <div class="progress" aria-label="progress"><div class="bar" id="bar"></div></div>
+    </section>
+
+    <section class="panel" id="quiz">
+      <!-- Questions 1..10 -->
+      <div class="q">
+        <h3>1) Which problem style sounds most engaging to you?</h3>
+        <div class="opt">
+          <label><input type="radio" name="q1" value="2"> Turning requirements into a working physical system under real constraints (cost, safety, schedule).</label>
+          <label><input type="radio" name="q1" value="1"> Exploring concepts without strict delivery pressure.</label>
+          <label><input type="radio" name="q1" value="0"> Tasks with minimal hands‑on or technical depth.</label>
+        </div>
+      </div>
+
+      <div class="q">
+        <h3>2) Typical ME tools — you’re most interested in…</h3>
+        <div class="opt">
+          <label><input type="radio" name="q2" value="2"> CAD + FEA/CFD + lab testing; pick the right tool for each stage.</label>
+          <label><input type="radio" name="q2" value="1"> CAD primarily; analysis/testing when needed.</label>
+          <label><input type="radio" name="q2" value="0"> Documentation/spreadsheets only.</label>
+        </div>
+      </div>
+
+      <div class="q">
+        <h3>3) Work settings you’d enjoy most:</h3>
+        <div class="opt">
+          <label><input type="radio" name="q3" value="2"> A mix of design office, lab, and occasional factory/field time.</label>
+          <label><input type="radio" name="q3" value="1"> Primarily office with some lab exposure.</label>
+          <label><input type="radio" name="q3" value="0"> Office‑only.</label>
+        </div>
+      </div>
+
+      <div class="q">
+        <h3>4) Standards & safety mindset:</h3>
+        <div class="opt">
+          <label><input type="radio" name="q4" value="2"> Design to code (ASME/ISO/ASHRAE), document, and verify.</label>
+          <label><input type="radio" name="q4" value="1"> Follow templates as needed.</label>
+          <label><input type="radio" name="q4" value="0"> Codes are optional.</label>
+        </div>
+      </div>
+
+      <div class="q">
+        <h3>5) Sustainability — best description of your approach:</h3>
+        <div class="opt">
+          <label><input type="radio" name="q5" value="2"> Consider efficiency/LCA early: energy, materials, maintainability.</label>
+          <label><input type="radio" name="q5" value="1"> Optimize efficiency if the spec asks for it.</label>
+          <label><input type="radio" name="q5" value="0"> Not a design driver.</label>
+        </div>
+      </div>
+
+      <div class="q">
+        <h3>6) Ethics & responsibility:</h3>
+        <div class="opt">
+          <label><input type="radio" name="q6" value="2"> Public safety first; escalate issues; don’t sign what isn’t verified.</label>
+          <label><input type="radio" name="q6" value="1"> Balance safety and schedule pragmatically.</label>
+          <label><input type="radio" name="q6" value="0"> Do as told; ethics is for management.</label>
+        </div>
+      </div>
+
+      <div class="q">
+        <h3>7) Typical ME domains you’d pick:</h3>
+        <div class="opt">
+          <label><input type="radio" name="q7" value="2"> Thermal/fluids, structures/materials, manufacturing/automation.</label>
+          <label><input type="radio" name="q7" value="1"> One domain only.</label>
+          <label><input type="radio" name="q7" value="0"> Prefer non‑technical roles exclusively.</label>
+        </div>
+      </div>
+
+      <div class="q">
+        <h3>8) How do you treat testing?</h3>
+        <div class="opt">
+          <label><input type="radio" name="q8" value="2"> Plan a DVP&R, instrument properly, reconcile model vs. test.</label>
+          <label><input type="radio" name="q8" value="1"> Test once at the end.</label>
+          <label><input type="radio" name="q8" value="0"> Skip testing if the model looks fine.</label>
+        </div>
+      </div>
+
+      <div class="q">
+        <h3>9) Project delivery comfort:</h3>
+        <div class="opt">
+          <label><input type="radio" name="q9" value="2"> Gated reviews, configuration control, and traceable requirements.</label>
+          <label><input type="radio" name="q9" value="1"> Informal checkpoints.</label>
+          <label><input type="radio" name="q9" value="0"> Ad‑hoc as things come.</label>
+        </div>
+      </div>
+
+      <div class="q">
+        <h3>10) Data & tools:</h3>
+        <div class="opt">
+          <label><input type="radio" name="q10" value="2"> Comfortable with Excel/MATLAB/Python to support decisions.</label>
+          <label><input type="radio" name="q10" value="1"> Basic spreadsheets only.</label>
+          <label><input type="radio" name="q10" value="0"> Prefer to avoid data tools.</label>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button id="see">See result</button>
+        <button class="ghost" id="resetBtn" type="button">Reset</button>
+      </div>
+
+      <div id="msg" class="msg">Please answer all questions before viewing the result.</div>
+
+      <div id="out" class="result">
+        <div class="kpis">
+          <div class="k"><h4>Completion</h4><b id="k_done">0/10</b></div>
+          <div class="k"><h4>Score (fit)</h4><b id="k_score">0</b></div>
+          <div class="k"><h4>Readout</h4><b id="k_read">—</b></div>
+        </div>
+        <div style="margin-top:10px;font-size:14px" id="advice"></div>
+      </div>
+    </section>
+
+    <footer>
+      Prepared for the course “Engineering, the Profession” — Mechanical Engineering. © <span id="y"></span> • By: Star
+    </footer>
+  </div>
+
+<script>
+(function(){
+  const total = 10;
+  const bar = document.getElementById('bar');
+  const msg = document.getElementById('msg');
+  const out = document.getElementById('out');
+  const kDone = document.getElementById('k_done');
+  const kScore = document.getElementById('k_score');
+  const kRead  = document.getElementById('k_read');
+  const advice = document.getElementById('advice');
+  document.getElementById('y').textContent = new Date().getFullYear();
+
+  function updateProgress(){
+    const answered = [...document.querySelectorAll('input[type=radio]:checked')].length;
+    const pct = Math.round((answered/total)*100);
+    bar.style.width = pct + '%';
+  }
+  document.querySelectorAll('input[type=radio]').forEach(r=>{
+    r.addEventListener('change', updateProgress, {passive:true});
+  });
+
+  function compute(){
+    let answered = 0, score = 0;
+    for(let i=1;i<=total;i++){
+      const sel = document.querySelector(`input[name=q${i}]:checked`);
+      if(sel){ answered++; score += parseInt(sel.value,10); }
+    }
+    return {answered, score};
+  }
+
+  document.getElementById('see').addEventListener('click', function(e){
+    e.preventDefault();
+    const {answered, score} = compute();
+    if(answered < total){
+      msg.style.display = 'block';
+      out.style.display = 'none';
+      return;
+    }
+    msg.style.display = 'none';
+    out.style.display = 'block';
+    kDone.textContent = answered + '/' + total;
+    kScore.textContent = score;
+
+    let read = '', tip = '';
+    if(score >= 16){
+      read = 'Strong ME fit';
+      tip = 'Consider systems roles (design–test–verification), energy/HVAC, automation, or advanced manufacturing.';
+    } else if(score >= 12){
+      read = 'Moderate ME fit';
+      tip = 'Build depth in codes/standards and verification; add simulation and test planning practice.';
+    } else {
+      read = 'Exploratory fit';
+      tip = 'Try more hands‑on labs and project exposure; strengthen fundamentals and toolchain comfort.';
+    }
+    kRead.textContent = read;
+    advice.textContent = tip;
+    window.scrollTo({top:out.offsetTop - 20, behavior:'smooth'});
+  }, {passive:false});
+
+  document.getElementById('resetBtn').addEventListener('click', function(){
+    document.querySelectorAll('input[type=radio]').forEach(r=> r.checked = false);
+    bar.style.width = '0%';
+    msg.style.display = 'none';
+    out.style.display = 'none';
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+})();
+</script>
+</body>
+</html>
